@@ -26,13 +26,17 @@ router.get("/books", (req, res) => {
 router.post("/books", (req, res) => {
   console.log("API just got called with body: ", req.body)
   db.Books.create(req.body)
-    .then(result => {console.log(result)})
+    .then(result => res.json(result))
+    .catch(err => res.status(422).json(err))
   
 });
 
 router.get("/books/:id", (req, res) => {
   let idInfo = req.params.id
   console.log("API just got called requesting id ",idInfo)
+  db.Books.findById(idInfo)
+    .then(result => res.json(result))
+    .catch(err => res.status(422).json(err))
 });
 
 
