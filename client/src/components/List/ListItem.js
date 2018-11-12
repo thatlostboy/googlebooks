@@ -1,34 +1,31 @@
 import React from "react";
+import {BtnListItem} from "../Buttons"
 
 export const ListItem = props => (
-    <div className="card">
-        <div className="card-block">
-
-
+    <div className="card book-item">
+        <div className="card-header">
+            {props.title}
+            <BtnListItem>Save</BtnListItem>
+            <BtnListItem>View</BtnListItem>
         </div>
         <div className="card-block">
             <div className="container">
-                <div className="row">
+                <div className="row card-block-top-spacing">
                     <div className="col-sm-12">
-                       {props.title}
-                  </div>
-                </div>
-
-                <div className="row">
-                    <div className="col-sm-12">
-                        author
-                </div>
-                </div>
-                <div className="row">
-                    <div className="col-sm-2">
-                        <img className="img-fluid" src="https://via.placeholder.com/150"></img>
+                        {props.author}
                     </div>
-                    <div className="col-sm-6">
-                        description
                 </div>
+                <div className="row card-block-top-spacing card-block-bottom-spacing">
+                    <div className="col-md-2">
+                        <img className="img-fluid" src={props.imgURL} alt={props.title}></img>
+                    </div>
+                    <div className="col-md-10">
+                        {props.description}
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 );
 

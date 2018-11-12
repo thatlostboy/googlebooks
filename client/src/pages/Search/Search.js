@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
-import List from "../../components/List"
+import { List, ListItem } from "../../components/List"
 /*
 import DeleteBtn from "../../components/DeleteBtn";
 
@@ -22,7 +22,32 @@ class Search extends Component {
     return (
       <div>
       <Jumbotron />
-      <List />
+      <List name="Book Search Results">
+      <ListItem
+          mongoID = "00001"
+          title="test book1"
+          author="test authotr1"
+          imgURL="https://via.placeholder.com/150"
+          description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+        />
+
+        <ListItem
+        mongoID = "00002"
+          title="test book2"
+          author="test authotr2"
+          imgURL="https://via.placeholder.com/150"
+          description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+        />
+
+
+        <ListItem
+        mongoID = "00003"
+          title="test book"
+          author="test authotr"
+          imgURL="https://via.placeholder.com/150"
+          description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+        />
+      </List>
       <h1>I am on Search Page</h1>
       </div>
     )
