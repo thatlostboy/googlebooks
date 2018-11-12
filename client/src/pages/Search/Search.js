@@ -18,37 +18,52 @@ class Search extends Component {
     loading: false
   }
 
+  saveBook = (book) => {
+    console.log("clicked on Save book")
+  }
+
+  deleteBook = (book) => {
+    console.log("clicked on delete book")
+  }
+
+  viewBook = (book) => {
+    console.log("clicked on view book")
+  }
+
   render() {
     return (
       <div>
-      <Jumbotron />
-      <List name="Book Search Results">
-      <ListItem
-          mongoID = "00001"
-          title="test book1"
-          author="test authotr1"
-          imgURL="https://via.placeholder.com/150"
-          description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-        />
+        <Jumbotron />
+        <List name="Book Search Results">
+          <ListItem
+            buttons="view save"
+            btnSave = {this.saveBook}
+            btnView = {this.viewBook}
+            mongoID="00001"
+            title="test book1"
+            author="test authotr1"
+            imgURL="https://via.placeholder.com/150"
+            description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+          />
 
-        <ListItem
-        mongoID = "00002"
-          title="test book2"
-          author="test authotr2"
-          imgURL="https://via.placeholder.com/150"
-          description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-        />
+          <ListItem
+            mongoID="00002"
+            title="test book2"
+            author="test authotr2"
+            imgURL="https://via.placeholder.com/150"
+            description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+          />
 
 
-        <ListItem
-        mongoID = "00003"
-          title="test book"
-          author="test authotr"
-          imgURL="https://via.placeholder.com/150"
-          description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-        />
-      </List>
-      <h1>I am on Search Page</h1>
+          <ListItem
+            mongoID="00003"
+            title="test book"
+            author="test authotr"
+            imgURL="https://via.placeholder.com/150"
+            description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+          />
+        </List>
+        <h1>I am on Search Page</h1>
       </div>
     )
   }

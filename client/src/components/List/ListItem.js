@@ -5,8 +5,8 @@ export const ListItem = props => (
     <div className="card book-item">
         <div className="card-header">
             {props.title}
-            <BtnListItem>Save</BtnListItem>
-            <BtnListItem>View</BtnListItem>
+            <BtnListItem action={props.btnSave}>Save</BtnListItem>
+            <BtnListItem action={props.btnView}>View</BtnListItem>
         </div>
         <div className="card-block">
             <div className="container">

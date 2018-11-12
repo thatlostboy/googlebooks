@@ -8,11 +8,8 @@ export const List = props => (
       <div className="card-body">
         {props.children}
       </div>
-
-
-
-    </div >
-  </div >
+    </div>
+  </div>
 );
 
 // export default List;
