@@ -34,13 +34,29 @@ class Search extends Component {
             return { title, authors, authorListString, description, thumbnail, infoLink }
           })
           this.setState({
+            loading: false,
             books: newList
           }, () => console.log("new State: ", this.state))
         } else {
+          this.setState({
+            loading: false,
+          })
           console.log("No Data")
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.setState({
+          loading: false,
+        })
+        console.log(err)
+
+      })
+  }
+
+  loadingState = (state) => {
+    this.setState({
+      loading: state
+    })
   }
 
   listBook = (book) => {
@@ -63,25 +79,23 @@ class Search extends Component {
   }
 
 
-  deleteBook = (book) => {
-    console.log("clicked on delete book")
-  }
+
 
   render() {
     return (
       <div>
         <Jumbotron />
-        <SearchCard btnSearch={this.searchBook} />
+        <SearchCard loading={this.state.loading} changeloading={this.loadingState} btnSearch={this.searchBook} />
         <List name="Book Search Results">
           {this.state.books.map(book => {
             return (
               <ListItem
-                key = {book.title+book.authorListString+book.thumbnail}
+                key={book.title + book.authorListString + book.thumbnail}
                 buttons="view save"
                 btnSave={this.saveBook}
                 infoLink={book.infoLink}
                 title={book.title}
-                authors = {book.authors}
+                authors={book.authors}
                 author={book.authorListString}
                 thumbnail={book.thumbnail}
                 description={book.description}

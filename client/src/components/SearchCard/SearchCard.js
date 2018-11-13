@@ -18,13 +18,15 @@ class SearchCard extends Component {
   };
 
   handleSubmit = event => {
-    event.preventDefault();
+    event.preventDefault()
+    this.props.changeloading(true)
     console.log("Hello!")
     console.log(this.state.query)
     this.props.btnSearch(this.state.query)
   }
 
   render() {
+  
     return (
       <div className="container searchcard-spacing">
         <div className="card">
@@ -37,7 +39,7 @@ class SearchCard extends Component {
                   <input type="text"  name = "query" value={this.state.query} onChange={this.handleInputChange} className="form-control" placeholder="Book Name" />
                 </div>
                 <div className="form-group col-4">
-                  <button className="btn btn-primary form-group">Search</button>
+                  <button className="btn btn-primary form-group" disabled={this.props.loading}>{ this.props.loading ? "Loading..." : "Search"  }</button>
                 </div>
               </div>
             </form>
