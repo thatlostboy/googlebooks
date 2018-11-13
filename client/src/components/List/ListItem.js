@@ -1,6 +1,6 @@
 import React from "react";
 import {BtnListItem} from "../Buttons"
-import API from "../../utils/API";
+
 
 
 export const ListItem = props => (
@@ -12,7 +12,8 @@ export const ListItem = props => (
                 description: props.description,
                 authors: props.authors,
                 infoLink: props.infoLink,
-                thumbnail: props.thumbnail
+                thumbnail: props.thumbnail,
+                etag: props.etag
             })}>Save</button>
             <a href={props.infoLink} target="_blank"><BtnListItem>View</BtnListItem></a>
         </div>

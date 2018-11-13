@@ -29,9 +29,12 @@ class Search extends Component {
         // console.log(res)
         if (res.data.length > 0) {
           let newList = res.data.map(book => {
-            const { title, authors, description, thumbnail, infoLink } = book
-            let authorListString = authors.join(", ")
-            return { title, authors, authorListString, description, thumbnail, infoLink }
+            const { etag, title, authors, description, thumbnail, infoLink } = book
+            let authorListString = ""
+            if (authors) { 
+              authorListString = authors.join(", ") 
+            }
+            return { etag, title, authors, authorListString, description, thumbnail, infoLink }
           })
           this.setState({
             loading: false,
@@ -72,10 +75,23 @@ class Search extends Component {
 
   saveBook = (book) => {
     console.log("clicked on Save book: ", book)
-    API.saveBook(book)
-      .then(res => {
-        console.log("Book was saved!")
+    API.getBookEtag(book['etag'])
+      .then( res => {
+        if (res.data.length > 0) {
+          console.log("Already saved!  ")
+        } else {
+          console.log("okay.  This is new. Let's add it!")
+          API.saveBook(book)
+          .then(res => {
+            console.log("Book was saved!")
+          })
+          .catch(err => {
+            console.log("Book saving failed")
+            console.log(err)
+          })
+        }
       })
+
   }
 
 
@@ -90,7 +106,8 @@ class Search extends Component {
           {this.state.books.map(book => {
             return (
               <ListItem
-                key={book.title + book.authorListString + book.thumbnail}
+                key={book.etag}
+                etag = {book.etag}
                 buttons="view save"
                 btnSave={this.saveBook}
                 infoLink={book.infoLink}
@@ -99,6 +116,7 @@ class Search extends Component {
                 author={book.authorListString}
                 thumbnail={book.thumbnail}
                 description={book.description}
+                
               />
             )
           })}

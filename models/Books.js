@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
+  etag: { type: String, required: true },
   title: { type: String, required: true },
   authors: { type: Array, default: []},
   description: { type: String },
