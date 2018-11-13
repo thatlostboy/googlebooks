@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import { List, ListItem } from "../../components/List"
+import SearchCard from "../../components/SearchCard"
+import API from "../../utils/API";
 /*
 import DeleteBtn from "../../components/DeleteBtn";
 
@@ -14,9 +16,43 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 
 class Search extends Component {
   state = {
+    query: "",
     books: [],
     loading: false
   }
+
+  searchBook = (book) => {
+    console.log("clicked on search book: ", book)
+    API.getNewBooks(book)
+      .then(res => {
+        console.log("Write this into the new state")
+        // console.log(res)
+        if (res.data.length > 0) {
+          let newList = res.data.map(book => {
+            const { title, authors, description, thumbnail, infoLink } = book
+            let authorListString = authors.join(", ")
+            return { title, authorListString, description, thumbnail, infoLink }
+          })
+          this.setState({
+            books: newList
+          }, () => console.log("new State: ", this.state))
+        } else {
+          console.log("No Data")
+        }
+      })
+      .catch(err => console.log(err))
+  }
+
+  listBook = (book) => {
+    console.log("clicked on list all saved books")
+    API.getBooks()
+      .then(res => {
+        console.log("clicked on list all saved books")
+        console.log(res.data)
+      })
+      .catch(err => console.log(err))
+  }
+
 
   saveBook = (book) => {
     console.log("clicked on Save book")
@@ -26,158 +62,32 @@ class Search extends Component {
     console.log("clicked on delete book")
   }
 
-  viewBook = (book) => {
-    console.log("clicked on view book")
-  }
-
   render() {
     return (
       <div>
         <Jumbotron />
+        <SearchCard btnSearch={this.searchBook} />
         <List name="Book Search Results">
-          <ListItem
-            buttons="view save"
-            btnSave = {this.saveBook}
-            btnView = {this.viewBook}
-            mongoID="00001"
-            title="test book1"
-            author="test authotr1"
-            imgURL="https://via.placeholder.com/150"
-            description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-          />
-
-          <ListItem
-            mongoID="00002"
-            title="test book2"
-            author="test authotr2"
-            imgURL="https://via.placeholder.com/150"
-            description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-          />
-
-
-          <ListItem
-            mongoID="00003"
-            title="test book"
-            author="test authotr"
-            imgURL="https://via.placeholder.com/150"
-            description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-          />
+          {this.state.books.map(book => {
+            return (
+              <ListItem
+                key = {book.title+book.authorListString+book.thumbnail}
+                buttons="view save"
+                btnSave={this.saveBook}
+                infoLink={book.infoLink}
+                title={book.title}
+                author={book.authorListString}
+                imgURL={book.thumbnail}
+                description={book.description}
+              />
+            )
+          })}
         </List>
-        <h1>I am on Search Page</h1>
       </div>
     )
   }
 }
 
+
 export default Search;
-
-/*
-class Books extends Component {
-  state = {
-    books: [],
-    title: "",
-    author: "",
-    synopsis: ""
-  };
-
-  componentDidMount() {
-    this.loadBooks();
-  }
-
-  loadBooks = () => {
-    API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-      )
-      .catch(err => console.log(err));
-  };
-
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  };
-
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadBooks())
-        .catch(err => console.log(err));
-    }
-  };
-
-  render() {
-    return (
-      <Container fluid>
-        <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>What Books Should I Read?</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <Input
-                value={this.state.author}
-                onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                value={this.state.synopsis}
-                onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              />
-              <FormBtn
-                disabled={!(this.state.author && this.state.title)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Book
-              </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
-            {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-}
-*/
 

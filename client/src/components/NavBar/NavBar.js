@@ -1,15 +1,15 @@
 import React from "react";
 
 const NavBar = () => (
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">GoogleBookSearch</a>
+<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a className="navbar-brand" href="/">GoogleBookSearch</a>
   
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="#">Search</a>
+  <ul className="navbar-nav">
+    <li className="nav-item">
+      <a className="nav-link" href="/search">Search</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Saved</a>
+    <li className="nav-item">
+      <a className="nav-link" href="/saved">Saved</a>
     </li>
   </ul>
 </nav>

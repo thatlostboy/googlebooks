@@ -1,11 +1,11 @@
 import React from "react";
 import {BtnListItem} from "../Buttons"
 
-export const ListItem = props => (
+export const SavedItem = props => (
     <div className="card book-item">
         <div className="card-header">
             {props.title}
-            <BtnListItem action={props.btnSave}>Save</BtnListItem>
+            <BtnListItem action={props.btnDelete}>Delete</BtnListItem>
             <a href={props.infoLink} target="_blank"><BtnListItem>View</BtnListItem></a>
         </div>
         <div className="card-block">

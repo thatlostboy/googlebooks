@@ -1,7 +1,8 @@
 import React from "react";
+import "./Jumbotron.css"
 
 const Jumbotron = () => (
-  <div className="container">
+  <div className="container jumbotron-spacing">
     <div className="card">
       <div className="card-header">Basic Banner Card</div>
       <div className="card-body">
