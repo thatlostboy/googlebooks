@@ -52,6 +52,13 @@ router.get("/books/:id", (req, res) => {
     .catch(err => res.status(422).json(err))
 });
 
+router.delete("/books/:id", (req, res) => {
+  let idInfo = req.params.id
+  console.log("API just got called requesting id ", idInfo)
+  db.Books.findByIdAndRemove(idInfo)
+    .then(result => res.json(result))
+    .catch(err => res.status(422).json(err))
+});
 
 
 module.exports = router;

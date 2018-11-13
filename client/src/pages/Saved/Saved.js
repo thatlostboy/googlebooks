@@ -10,19 +10,7 @@ class Saved extends Component {
     loading: false
   }
 
-  /*
-  listBook = (book) => {
-    console.log("clicked on list all saved books")
-    API.getBooks()
-      .then(res => {
-        console.log("clicked on list all saved books")
-        console.log(res.data)
-      })
-      .catch(err => console.log(err))
-  }
-  */
-
-  componentDidMount(){
+  getSavedBooks = () => {
     API.getBooks()
       .then(res => {
         console.log("clicked on list all saved books")
@@ -42,12 +30,20 @@ class Saved extends Component {
   }
 
 
-  saveBook = (book) => {
-    console.log("clicked on Save book")
+  componentDidMount(){
+    this.getSavedBooks()
   }
 
-  deleteBook = (book) => {
-    console.log("clicked on delete book")
+
+  deleteBook = (bookID) => {
+    console.log("clicked on delete book ", bookID)
+    API.deleteBook(bookID)
+      .then(
+        this.getSavedBooks()
+      )
+      .catch(
+        err => console.log(err)
+      )
   }
 
   render() {
@@ -61,10 +57,11 @@ class Saved extends Component {
                 key = {book._id}
                 buttons="view delete"
                 btnDelete={this.deleteBook}
+                id = {book._id}
                 infoLink={book.infoLink}
                 title={book.title}
                 author={book.authorListString}
-                imgURL={book.thumbnail}
+                thumbnail={book.thumbnail}
                 description={book.description}
               />
             )

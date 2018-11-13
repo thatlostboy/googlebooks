@@ -31,7 +31,7 @@ class Search extends Component {
           let newList = res.data.map(book => {
             const { title, authors, description, thumbnail, infoLink } = book
             let authorListString = authors.join(", ")
-            return { title, authorListString, description, thumbnail, infoLink }
+            return { title, authors, authorListString, description, thumbnail, infoLink }
           })
           this.setState({
             books: newList
@@ -55,8 +55,13 @@ class Search extends Component {
 
 
   saveBook = (book) => {
-    console.log("clicked on Save book")
+    console.log("clicked on Save book: ", book)
+    API.saveBook(book)
+      .then(res => {
+        console.log("Book was saved!")
+      })
   }
+
 
   deleteBook = (book) => {
     console.log("clicked on delete book")
@@ -76,8 +81,9 @@ class Search extends Component {
                 btnSave={this.saveBook}
                 infoLink={book.infoLink}
                 title={book.title}
+                authors = {book.authors}
                 author={book.authorListString}
-                imgURL={book.thumbnail}
+                thumbnail={book.thumbnail}
                 description={book.description}
               />
             )
