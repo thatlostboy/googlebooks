@@ -12,7 +12,7 @@ export const SavedItem = props => (
             <div className="container">
                 <div className="row card-block-top-spacing">
                     <div className="col-sm-12">
-                        {props.author}
+Author(s): {props.author}
                     </div>
                 </div>
                 <div className="row card-block-top-spacing card-block-bottom-spacing">
